@@ -4,6 +4,7 @@ import { fetchFriends } from '../actions';
 import uuid from 'uuid';
 
 import Friend from './Friend';
+import AddFriendForm from './AddFriendForm';
 
 const FriendsList = props => {
 
@@ -18,6 +19,7 @@ const FriendsList = props => {
 
   return (
     <div>
+      <AddFriendForm />
       {
         props.friends.map( friend => (
           <Friend key={ uuid.v4() } friend={ friend } />

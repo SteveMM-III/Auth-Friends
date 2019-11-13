@@ -1,5 +1,5 @@
 
-import { FETCH_FRIENDS_LOADING, FETCH_FRIENDS_SUCCESS, FETCH_FRIENDS_FAILED, LOGIN_LOADING, LOGIN_SUCCESS, LOGIN_FAILED } from '../actions';
+import { FETCH_FRIENDS_LOADING, FETCH_FRIENDS_SUCCESS, FETCH_FRIENDS_FAILED, LOGIN_LOADING, LOGIN_SUCCESS, LOGIN_FAILED, ADD, ADD_FAILED } from '../actions';
 
 export const initialState = {
   friends: [],
@@ -48,6 +48,16 @@ export const reducer = ( state = initialState, action ) => {
         ...state,
         friends: [],
         isFetching: false,
+        error: action.payload
+      }
+    case ADD:
+      return {
+        ...state,
+        friends: [ ...state.friends, action.payload ]
+      }
+    case ADD_FAILED:
+      return {
+        ...state,
         error: action.payload
       }
     default: return state;
