@@ -1,4 +1,5 @@
 import axios from 'axios';
+import CreateBrowserHistory from '../components/history';
 
 export const LOGIN_LOADING         = 'LOGIN_LOADING';
 export const LOGIN_SUCCESS         = 'LOGIN_SUCCESS';
@@ -31,28 +32,36 @@ export const friendsLoadFailure = error => ( {
   payload: error
 } );
 
+const axiosWithAuth = () => {
+  return axios.create( {
+    headers: {
+      authorization: sessionStorage.getItem( 'token' )
+    }
+  } );
+};
+
 export function login( name, pass ) {
   return function( dispatch ) {
     dispatch( loginLoading() );
-    console.log( 'name: ', name );
-    console.log( 'pass: ', pass );
 
     return axios
       .post( 'http://localhost:5000/api/login', { username: name, password: pass } )
       // .then( res => console.log( res.data.payload ) )
       .then( res => dispatch( loginSuccess( res.data.payload ) ) )
+      .then ( CreateBrowserHistory.push( '/protected' ) )
       .catch( error => dispatch( loginFailure( error ) ) );
   }
 }
 
-export function fetchFriends() {
+export function fetchFriends( header ) {
   return function( dispatch ) {
     dispatch( friendsLoading() );
 
-    return axios
+    const authAxios = axiosWithAuth();
+
+    return authAxios
       .get( 'http://localhost:5000/api/friends' )
-      .then( res => console.log( res ) )
-      // .then ( res   => dispatch( friendsLoadSuccess( res.data ) ) )
+      .then ( res   => dispatch( friendsLoadSuccess( res.data ) ) )
       .catch( error => dispatch( friendsLoadFailure( error ) ) );
   }
 }
