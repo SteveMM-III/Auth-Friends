@@ -1,5 +1,4 @@
 import axios from 'axios';
-import CreateBrowserHistory from '../components/history';
 
 export const LOGIN_LOADING         = 'LOGIN_LOADING';
 export const LOGIN_SUCCESS         = 'LOGIN_SUCCESS';
@@ -46,9 +45,7 @@ export function login( name, pass ) {
 
     return axios
       .post( 'http://localhost:5000/api/login', { username: name, password: pass } )
-      // .then( res => console.log( res.data.payload ) )
       .then( res => dispatch( loginSuccess( res.data.payload ) ) )
-      .then ( CreateBrowserHistory.push( '/protected' ) )
       .catch( error => dispatch( loginFailure( error ) ) );
   }
 }

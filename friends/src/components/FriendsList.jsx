@@ -27,7 +27,7 @@ const FriendsList = props => {
   );
 };
 
-const mapDispathToProps = {
+const mapDispatchToProps = {
   fetchFriends
 };
 

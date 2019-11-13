@@ -8,7 +8,9 @@ const StyledFriend = styled.div`
 `;
 
 const Friend = props => {
+
   const friend = props.friend;
+
   return (
     <StyledFriend>
       <p>name: { friend.name }</p>

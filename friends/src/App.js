@@ -15,8 +15,10 @@ function App() {
           <PrivateRoute path='/protected'>
             <Route exact path='/protected' component={ FriendsList } />
           </PrivateRoute>
-          <Route exact path='/login' component={ Login } />
-          <Route component={ Login } />
+          <Route exact path='/login' render={ ( props ) =>
+            <Login { ...props } /> } />
+          <Route  render={ ( props ) =>
+            <Login { ...props } /> } />
         </Switch>
       </div>  
     </Router>

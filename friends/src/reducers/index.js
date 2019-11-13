@@ -2,7 +2,6 @@
 import { FETCH_FRIENDS_LOADING, FETCH_FRIENDS_SUCCESS, FETCH_FRIENDS_FAILED, LOGIN_LOADING, LOGIN_SUCCESS, LOGIN_FAILED } from '../actions';
 
 export const initialState = {
-  token: '',
   friends: [],
   isLoggedIn: sessionStorage.getItem( 'token' ) ? true : false,
   error: null,
@@ -20,8 +19,7 @@ export const reducer = ( state = initialState, action ) => {
     case LOGIN_SUCCESS:
       sessionStorage.setItem( 'token', action.payload );
       return {
-        ...state,
-        token: action.payload,        
+        ...state,      
         isLoggedIn: true,
         isFetching: false,
         error: null

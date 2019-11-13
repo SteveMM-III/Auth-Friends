@@ -22,7 +22,8 @@ class Login extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.dispatch( login( this.state.credentials.username, this.state.credentials.password ) );
-    this.setState( { credentials: { username: 'Lambda School', password: 'i<3Lambd4' } } );
+    // this.setState( { credentials: { username: 'Lambda School', password: 'i<3Lambd4' } } );
+    this.props.history.push( '/protected' );
   };
 
   render() {
